@@ -1,45 +1,60 @@
 import React, { useState } from "react";
-import * as FaIcons from "react-icons/fa";
-import * as AiIcons from "react-icons/ai";
-import { Link } from "react-router-dom";
 import { SidebarData } from "../component/SidebarData";
 import "../styles/MoveBar.css";
 import { IconContext } from "react-icons";
-
-function MoveBar() {
-  const [sidebar, setSidebar] = useState(false);
-
-  const showSidebar = () => setSidebar(!sidebar);
-
+import { Link, NavLink } from "react-router-dom";
+import { ImCross } from "react-icons/im";
+import { GiHamburgerMenu } from "react-icons/gi";
+//import logo from "../images/gmail-google.png";
+function MoveBar({ clicked, isClicked }) {
+  const handleClicked = () => {
+    isClicked(!clicked);
+    console.log("clicked");
+  };
   return (
-    <>
-      <IconContext.Provider value={{ color: "#fff" }}>
-        <div className="MoveBar">
-          <Link to="#" className="menu-bars">
-            <FaIcons.FaBars onClick={showSidebar} />
-          </Link>
-        </div>
-        <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
-          <ul className="nav-menu-items" onClick={showSidebar}>
-            <li className="navbar-toggle">
-              <Link to="#" className="menu-bars">
-                <AiIcons.AiOutlineClose />
-              </Link>
-            </li>
-            {SidebarData.map((item, index) => {
-              return (
-                <li key={index} className={item.cName}>
-                  <Link to={item.path}>
-                    {item.icon}
-                    <span>{item.title}</span>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
-      </IconContext.Provider>
-    </>
+    <div className="Nav">
+      <ul className="NavbarWrapper">
+        <li className="NavLogo">
+          {/*<div className="logo">
+            <img src={logo} alt="" />
+  </div>*/}
+        </li>
+        <li className="NavElements">
+          <NavLink className="Link" to="/">
+            Home
+          </NavLink>
+        </li>
+        <li className="NavElements">
+          <NavLink className="Link" to="/about-us">
+            About Us
+          </NavLink>
+        </li>
+        <li className="NavElements">
+          <NavLink className="Link" to="/contact-us">
+            Contact Us
+          </NavLink>
+        </li>
+
+        <li className="NavButton">
+          <NavLink className="Link" to="/login">
+            login
+          </NavLink>
+        </li>
+        <li
+          className="NavElements"
+          style={{ float: "right", margin: "-8px 2px 1px 2px" }}
+        >
+          <NavLink className="Link" to="/registration">
+            Registration
+          </NavLink>
+        </li>
+      </ul>
+      {!clicked ? (
+        <GiHamburgerMenu onClick={handleClicked} className="Icon" />
+      ) : (
+        <ImCross onClick={handleClicked} className="Icon" />
+      )}
+    </div>
   );
 }
 
