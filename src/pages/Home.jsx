@@ -15,6 +15,7 @@ import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
+import CookieConsent from "react-cookie-consent";
 
 export default function Home({ type }) {
   const [country, setCountry] = useState([]);
@@ -74,7 +75,7 @@ export default function Home({ type }) {
               <div className="headerSearchItem">
                 <select name="country" className="headerSearchInput">
                   {country.map((country) => (
-                    <option key={country.id} value={country.id}>
+                    <option key={country.name.common} value={country.id}>
                       {country.name.common}{" "}
                       {/* Assuming `common` is the property you want to display */}
                     </option>
@@ -191,6 +192,17 @@ export default function Home({ type }) {
       </div>
       <div className="section1">
         <CustomSlider />
+      </div>
+      <div>
+        <CookieConsent
+          debug={true}
+          location="bottom"
+          style={{ background: "#000", textAlign: "left" }}
+          buttonStyle={{ color: "#4e503b", fontSize: "13px" }}
+          expires={150}
+        >
+          this site uses cookies
+        </CookieConsent>
       </div>
     </div>
   );
