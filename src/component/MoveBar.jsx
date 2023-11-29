@@ -43,11 +43,7 @@ function MoveBar({ clicked, isClicked }) {
         <li
           className="NavElements"
           style={{ float: "right", margin: "-8px 2px 1px 2px" }}
-        >
-          <NavLink className="Link" to="/registration">
-            Registration
-          </NavLink>
-        </li>
+        ></li>
       </ul>
       {!clicked ? (
         <GiHamburgerMenu onClick={handleClicked} className="Icon" />
