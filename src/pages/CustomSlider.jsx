@@ -56,7 +56,7 @@ function CustomSlider() {
     <div className="CustomSlider">
       <Slider {...settings}>
         {dataDigitalBestSeller.map((item) => (
-          <div className="card">
+          <div key={item.title} className="card">
             <div className="card-top">
               <img
                 src={
