@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-
+import Routercards from "../pages/Routercards";
+import "../styles/Hotels.css";
 function Hotels() {
   const [commentsData, setCommentsData] = useState([]);
 
@@ -46,13 +47,13 @@ function Hotels() {
   }, []);
 
   return (
-    <div>
+    <div className="media-map">
       <div style={{ display: "flex" }}>
         <div style={{ flex: 2 }}>{/* Контент слева */}</div>
-        <div style={{ flex: 1 }}>
+        <div style={{ flex: 1, marginTop: "60px" }}>
           <iframe
-            width="759"
-            height="846"
+            width="840"
+            height="784"
             frameBorder="0"
             scrolling="no"
             marginHeight="0"
@@ -62,21 +63,30 @@ function Hotels() {
           ></iframe>
         </div>
       </div>
-      {commentsData.length > 0 ? (
+      {commentsData.length > 0 && (
         <div>
           <h2>Список комментариев</h2>
-          {commentsData.map((comment) => (
-            <div key={comment.id}>
-              <h3>Комментарий {comment.id}</h3>
+          {commentsData.map((comment, i) => (
+            <div key={i}>
+              <h3>
+                Комментарий {comment.postId}-
+                {comment.userId !== undefined ? comment.userId : "undefined"}
+              </h3>
               <p>Текст: {comment.body}</p>
               <p>ИД поста: {comment.postId}</p>
-              <p>Пользователь: {comment.user.username}</p>
+              <p>
+                Пользователь:{" "}
+                {comment.userId !== undefined ? comment.userId : "undefined"}
+              </p>
             </div>
           ))}
         </div>
-      ) : (
-        <p>Загрузка данных...</p>
       )}
+      <p>Загрузка данных...</p>
+
+      <div>
+        <Routercards />
+      </div>
     </div>
   );
 }
